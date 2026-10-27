@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación Web | Tarea Práctica 2</title>
+  <style>
+    :root { --bg:#0b1020; --panel:#151d33; --accent:#7c5cff; --accent2:#23c9a9; --text:#f4f6ff; --muted:#aeb8d0; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial, sans-serif; background:radial-gradient(circle at top right,#242e58,var(--bg) 55%); color:var(--text); min-height:100vh; }
+    header { padding:54px 20px 38px; text-align:center; }
+    .tag { display:inline-block; color:#a9ffe9; background:#123b3a; padding:7px 12px; border-radius:30px; font-size:.85rem; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:18px 0 10px; }
+    header p { color:var(--muted); max-width:680px; margin:0 auto; line-height:1.6; }
+    main { width:min(1100px,92%); margin:0 auto 60px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .card { background:rgba(21,29,51,.92); border:1px solid #2b3657; border-radius:18px; padding:22px; transition:transform .2s,border-color .2s; }
+    .card:hover { transform:translateY(-4px); border-color:var(--accent); }
+    .number { color:var(--accent2); font-weight:bold; font-size:.85rem; letter-spacing:1px; }
+    h2 { font-size:1.15rem; margin:12px 0 8px; }
+    .card p { color:var(--muted); font-size:.93rem; line-height:1.5; min-height:42px; }
+    a.link { display:inline-block; margin-top:10px; color:white; text-decoration:none; background:var(--accent); padding:10px 14px; border-radius:10px; font-weight:bold; }
+    a.link:hover { filter:brightness(1.12); }
+    footer { text-align:center; color:var(--muted); padding:20px; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="tag">TAREA PRÁCTICA 2 · UNIDAD 1</span>
+    <h1>Laboratorio de Programación Web</h1>
+    <p>Diez ejercicios prácticos desarrollados con HTML, CSS y JavaScript para demostrar interactividad, lógica y diseño adaptable.</p>
+  </header>
+  <main>
+    <div class="grid">
+      <article class="card"><span class="number">EJERCICIO 01</span><h2>Cambio de estilo al clic</h2><p>Cambia el color de un elemento al presionar un botón.</p><a class="link" href="ej01.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 02</span><h2>Calculadora simple</h2><p>Realiza operaciones aritméticas básicas.</p><a class="link" href="ej02.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 03</span><h2>Cambio de imagen</h2><p>Cambia la ilustración al pasar el cursor.</p><a class="link" href="ej03.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 04</span><h2>Reloj analógico</h2><p>Muestra la hora actual con manecillas.</p><a class="link" href="ej04.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 05</span><h2>Validación de formulario</h2><p>Comprueba nombre, correo y contraseña.</p><a class="link" href="ej05.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 06</span><h2>Lista de tareas</h2><p>Agrega, marca y elimina tareas.</p><a class="link" href="ej06.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 07</span><h2>Menú desplegable</h2><p>Abre y cierra submenús de navegación.</p><a class="link" href="ej07.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 08</span><h2>Carrusel de imágenes</h2><p>Navega imágenes de forma automática o manual.</p><a class="link" href="ej08.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 09</span><h2>Cuenta regresiva</h2><p>Temporizador con inicio, pausa y reinicio.</p><a class="link" href="ej09.html">Abrir ejercicio →</a></article>
+      <article class="card"><span class="number">EJERCICIO 10</span><h2>Preguntas y respuestas</h2><p>Responde un cuestionario y revisa tu puntuación.</p><a class="link" href="ej10.html">Abrir ejercicio →</a></article>
+    </div>
+  </main>
+  <footer>Desarrollado con HTML, CSS y JavaScript · Tarea Práctica 2</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 6: Lista de tareas interactiva</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 6: Lista de tareas interactiva</h1>
+<p>Escribe una tarea y agrégala a la lista. Puedes marcarla como completada o eliminarla.</p>
+<form id="formTarea"><input id="nuevaTarea" placeholder="Ej. Estudiar JavaScript" style="width:min(100%,420px)" required><button type="submit">Agregar</button></form>
+<ul id="lista" style="padding-left:22px;line-height:2"></ul><p id="contador" class="result">Tareas pendientes: 0</p>
+</main>
+<script>
+
+const form=document.getElementById('formTarea'),entrada=document.getElementById('nuevaTarea'),lista=document.getElementById('lista');
+function actualizar(){document.getElementById('contador').textContent='Tareas pendientes: '+lista.querySelectorAll('input[type=checkbox]:not(:checked)').length;}
+form.addEventListener('submit',e=>{e.preventDefault();const texto=entrada.value.trim();if(!texto)return;const li=document.createElement('li'),check=document.createElement('input'),span=document.createElement('span'),borrar=document.createElement('button');check.type='checkbox';check.setAttribute('aria-label','Marcar tarea como completada');span.textContent=' '+texto+' ';borrar.textContent='Eliminar';borrar.type='button';borrar.style.background='#b83d58';check.addEventListener('change',()=>{span.style.textDecoration=check.checked?'line-through':'none';span.style.opacity=check.checked?'.6':'1';actualizar();});borrar.addEventListener('click',()=>{li.remove();actualizar();});li.append(check,span,borrar);lista.appendChild(li);entrada.value='';entrada.focus();actualizar();});
+
+</script></body></html>

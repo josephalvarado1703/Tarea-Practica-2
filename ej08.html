@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 8: Carrusel de imágenes</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 8: Carrusel de imágenes</h1>
+<p>Usa los botones para cambiar de imagen. El carrusel avanza automáticamente cada 4 segundos.</p>
+<div style="text-align:center">
+<svg id="escena" viewBox="0 0 600 300" style="width:100%;border-radius:16px;display:block" role="img" aria-label="Paisaje del carrusel">
+<rect id="fondo" width="600" height="300" fill="#7ed3f7"/><circle id="astro" cx="475" cy="65" r="35" fill="#ffe27a"/><path id="cerro1" d="M0 240 L140 75 L290 240Z" fill="#397b72"/><path id="cerro2" d="M180 250 L390 60 L600 250Z" fill="#285c69"/><path id="agua" d="M0 240 Q150 220 300 250 T600 240 V300 H0Z" fill="#287da0"/>
+</svg><p id="tituloImagen" class="result">Imagen 1: Día soleado</p>
+<button id="anterior" style="background:#34415f">← Anterior</button><button id="siguiente">Siguiente →</button><button id="pausa" style="background:#137b69">Pausar automático</button>
+</div>
+</main>
+<script>
+
+const escenas=[{nombre:'Día soleado',cielo:'#7ed3f7',astro:'#ffe27a',montana:'#397b72',agua:'#287da0'},{nombre:'Atardecer',cielo:'#e99b80',astro:'#ffdb9b',montana:'#744b68',agua:'#9c5e73'},{nombre:'Noche estrellada',cielo:'#172448',astro:'#e9edff',montana:'#303b67',agua:'#172e3a'}];let actual=0,detenido=false;
+function mostrar(){const e=escenas[actual];document.getElementById('fondo').setAttribute('fill',e.cielo);document.getElementById('astro').setAttribute('fill',e.astro);document.getElementById('cerro1').setAttribute('fill',e.montana);document.getElementById('cerro2').setAttribute('fill',actual===1?'#573c63':actual===2?'#222c51':'#285c69');document.getElementById('agua').setAttribute('fill',e.agua);document.getElementById('tituloImagen').textContent=`Imagen ${actual+1}: ${e.nombre}`;}
+function mover(n){actual=(actual+n+escenas.length)%escenas.length;mostrar();}
+document.getElementById('anterior').addEventListener('click',()=>mover(-1));document.getElementById('siguiente').addEventListener('click',()=>mover(1));document.getElementById('pausa').addEventListener('click',e=>{detenido=!detenido;e.target.textContent=detenido?'Reanudar automático':'Pausar automático';});
+setInterval(()=>{if(!detenido)mover(1);},4000);mostrar();
+
+</script></body></html>

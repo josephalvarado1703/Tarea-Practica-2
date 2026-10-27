@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 3: Cambio de imagen al pasar el ratón</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 3: Cambio de imagen al pasar el ratón</h1>
+<p>Pasa el cursor sobre la ilustración para cambiarla. En móviles, puedes tocarla.</p>
+<div style="text-align:center">
+<svg id="imagen" viewBox="0 0 320 200" role="img" aria-label="Ilustración de un paisaje" style="width:min(100%,420px);border-radius:16px;transition:transform .3s;cursor:pointer">
+<rect id="cielo" width="320" height="200" rx="16" fill="#72c8ef"/><circle id="sol" cx="250" cy="45" r="23" fill="#ffe27a"/>
+<path id="montana" d="M0 160 L75 65 L135 140 L195 50 L320 165 V200 H0Z" fill="#43866d"/>
+<path id="suelo" d="M0 170 Q100 140 180 175 T320 165 V200 H0Z" fill="#27644f"/>
+</svg>
+<p id="estado" class="result">Paisaje de día</p></div>
+</main>
+<script>
+
+const img=document.getElementById('imagen');let noche=false;
+function cambiar(){noche=!noche;document.getElementById('cielo').setAttribute('fill',noche?'#172448':'#72c8ef');document.getElementById('sol').setAttribute('fill',noche?'#e9edff':'#ffe27a');document.getElementById('sol').setAttribute('r',noche?'15':'23');document.getElementById('montana').setAttribute('fill',noche?'#303b67':'#43866d');document.getElementById('suelo').setAttribute('fill',noche?'#172e3a':'#27644f');document.getElementById('estado').textContent=noche?'Paisaje nocturno':'Paisaje de día';img.style.transform=noche?'scale(1.02)':'scale(1)';}
+img.addEventListener('mouseenter',()=>{if(!noche)cambiar();});img.addEventListener('mouseleave',()=>{if(noche)cambiar();});img.addEventListener('click',cambiar);
+
+</script></body></html>

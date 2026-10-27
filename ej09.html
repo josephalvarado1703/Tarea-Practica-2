@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 9: Temporizador de cuenta regresiva</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 9: Temporizador de cuenta regresiva</h1>
+<p>Configura los minutos y segundos, luego inicia el temporizador.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="minutos" type="number" min="0" max="999" value="1" aria-label="Minutos" style="width:120px"><span style="align-self:center">minutos</span><input id="segundos" type="number" min="0" max="59" value="0" aria-label="Segundos" style="width:120px"><span style="align-self:center">segundos</span></div>
+<div id="pantalla" style="font-size:clamp(3rem,10vw,5rem);font-weight:bold;text-align:center;margin:24px 0;font-variant-numeric:tabular-nums">01:00</div>
+<div style="text-align:center"><button id="iniciar">Iniciar</button><button id="pausar" style="background:#34415f">Pausar</button><button id="reiniciar" style="background:#137b69">Reiniciar</button></div><p id="estado" class="result" style="text-align:center">Listo para comenzar.</p>
+</main>
+<script>
+
+let restante=60,intervalo=null,activo=false;
+const minutos=document.getElementById('minutos'),segundos=document.getElementById('segundos'),pantalla=document.getElementById('pantalla'),estado=document.getElementById('estado');
+function formato(n){return String(n).padStart(2,'0');}
+function pintar(){pantalla.textContent=formato(Math.floor(restante/60))+':'+formato(restante%60);}
+function leer(){const m=Number(minutos.value),s=Number(segundos.value);if(minutos.value===''||segundos.value===''||m<0||s<0||s>59){estado.textContent='Ingresa un tiempo válido.';return false;}restante=Math.floor(m*60+s);pintar();return true;}
+function parar(){clearInterval(intervalo);intervalo=null;activo=false;}
+document.getElementById('iniciar').addEventListener('click',()=>{if(activo)return;if(!leer())return;if(restante<=0){estado.textContent='Configura un tiempo mayor que cero.';return;}activo=true;estado.textContent='Cuenta regresiva en curso…';intervalo=setInterval(()=>{restante--;pintar();if(restante<=0){parar();estado.textContent='¡Tiempo terminado!';}},1000);});
+document.getElementById('pausar').addEventListener('click',()=>{if(activo){parar();estado.textContent='Temporizador pausado.';}});
+document.getElementById('reiniciar').addEventListener('click',()=>{parar();leer();estado.textContent='Temporizador reiniciado.';});
+pintar();
+
+</script></body></html>

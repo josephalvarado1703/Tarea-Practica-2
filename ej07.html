@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 7: Menú de navegación desplegable</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 7: Menú de navegación desplegable</h1>
+<p>Haz clic en cada categoría para mostrar u ocultar sus submenús.</p>
+<nav style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start">
+<div class="grupo"><button class="principal" aria-expanded="false">Estudios ▾</button><div class="submenu" hidden style="padding:10px;background:#0c1327;border-radius:10px"><p><a href="#html" style="color:#a9ffe9">HTML</a></p><p><a href="#css" style="color:#a9ffe9">CSS</a></p><p><a href="#js" style="color:#a9ffe9">JavaScript</a></p></div></div>
+<div class="grupo"><button class="principal" aria-expanded="false">Recursos ▾</button><div class="submenu" hidden style="padding:10px;background:#0c1327;border-radius:10px"><p><a href="#tutoriales" style="color:#a9ffe9">Tutoriales</a></p><p><a href="#practicas" style="color:#a9ffe9">Prácticas</a></p><p><a href="#documentacion" style="color:#a9ffe9">Documentación</a></p></div></div>
+</nav><p id="mensaje" class="result">Selecciona una categoría.</p>
+</main>
+<script>
+
+document.querySelectorAll('.principal').forEach(btn=>btn.addEventListener('click',()=>{const menu=btn.nextElementSibling,abrir=menu.hidden;document.querySelectorAll('.submenu').forEach(m=>m.hidden=true);document.querySelectorAll('.principal').forEach(b=>b.setAttribute('aria-expanded','false'));if(abrir){menu.hidden=false;btn.setAttribute('aria-expanded','true');document.getElementById('mensaje').textContent='Submenú abierto: '+btn.textContent.replace(' ▾','');}else{document.getElementById('mensaje').textContent='Submenú cerrado.';}}));
+
+</script></body></html>

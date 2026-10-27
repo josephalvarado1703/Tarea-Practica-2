@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio 10: Juego de preguntas y respuestas</title>
+<style>
+*{box-sizing:border-box} body{margin:0;padding:24px;font-family:Arial,sans-serif;background:#0b1020;color:#f4f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+main{width:min(720px,100%);background:#151d33;border:1px solid #2b3657;border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 55px #0005}
+h1{margin-top:0;font-size:clamp(1.6rem,4vw,2.2rem)} p{color:#b8c2da;line-height:1.55}
+button,input,select{font:inherit;border:0;border-radius:10px;padding:11px 14px;margin:5px 3px}
+button{background:#7c5cff;color:white;cursor:pointer;font-weight:bold}button:hover{filter:brightness(1.12)} input,select{background:#0c1327;color:#fff;border:1px solid #354263;max-width:100%}
+.back{display:inline-block;color:#a9ffe9;text-decoration:none;margin-bottom:20px} .muted{color:#aeb8d0} .result{margin-top:16px;color:#a9ffe9;font-weight:bold}
+
+</style>
+</head>
+<body><main><a class="back" href="index.html">← Volver al menú principal</a><h1>Ejercicio 10: Juego de preguntas y respuestas</h1>
+<p>Responde las preguntas sobre fundamentos de programación web. Al final verás tu puntuación.</p>
+<div id="progreso" class="muted"></div><h2 id="pregunta" style="font-size:1.35rem"></h2>
+<div id="opciones" style="display:grid;gap:10px;margin:20px 0"></div>
+<div id="retro" aria-live="polite" class="result"></div><button id="siguiente" disabled>Siguiente pregunta →</button><button id="reiniciar" style="background:#34415f">Reiniciar juego</button>
+</main>
+<script>
+
+const preguntas=[
+{p:'¿Qué lenguaje define la estructura de una página web?',o:['HTML','CSS','SQL','Python'],r:0},
+{p:'¿Qué tecnología se utiliza principalmente para dar estilo a una página?',o:['Java','CSS','HTML solamente','CSV'],r:1},
+{p:'¿Qué lenguaje permite agregar interactividad en el navegador?',o:['JavaScript','XML','Photoshop','Excel'],r:0},
+{p:'¿Qué etiqueta HTML crea un enlace?',o:['<p>','<img>','<a>','<table>'],r:2},
+{p:'¿Qué símbolo se usa normalmente para seleccionar un id en CSS?',o:['.','@','#','&'],r:2}
+];let indice=0,puntos=0,respondida=false;
+const pregunta=document.getElementById('pregunta'),opciones=document.getElementById('opciones'),retro=document.getElementById('retro'),siguiente=document.getElementById('siguiente');
+function mostrar(){respondida=false;retro.textContent='';siguiente.disabled=true;document.getElementById('progreso').textContent=`Pregunta ${indice+1} de ${preguntas.length} · Puntuación: ${puntos}`;pregunta.textContent=preguntas[indice].p;opciones.replaceChildren();preguntas[indice].o.forEach((texto,i)=>{const b=document.createElement('button');b.textContent=texto;b.style.textAlign='left';b.style.background='#34415f';b.addEventListener('click',()=>responder(i,b));opciones.appendChild(b);});}
+function responder(i,boton){if(respondida)return;respondida=true;const correcta=preguntas[indice].r;if(i===correcta){puntos++;retro.textContent='¡Correcto!';}else{retro.textContent='Respuesta incorrecta. La respuesta correcta es: '+preguntas[indice].o[correcta]+'.';}Array.from(opciones.children).forEach((b,j)=>{b.disabled=true;b.style.opacity='.7';if(j===correcta)b.style.background='#137b69';});siguiente.disabled=false;siguiente.textContent=indice===preguntas.length-1?'Ver resultado':'Siguiente pregunta →';}
+siguiente.addEventListener('click',()=>{if(!respondida)return;if(indice<preguntas.length-1){indice++;mostrar();}else{pregunta.textContent='¡Juego completado!';opciones.replaceChildren();document.getElementById('progreso').textContent='Resultado final';retro.textContent=`Obtuviste ${puntos} de ${preguntas.length} puntos (${Math.round(puntos/preguntas.length*100)}%).`;siguiente.disabled=true;}});
+document.getElementById('reiniciar').addEventListener('click',()=>{indice=0;puntos=0;mostrar();siguiente.textContent='Siguiente pregunta →';});
+mostrar();
+
+</script></body></html>
